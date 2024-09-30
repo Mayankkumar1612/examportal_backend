@@ -1,18 +1,17 @@
 import { useState } from "react";
-import img1 from "F:/Office work/exam portal/Exam_portal/src/assets/college-entrance-exam-concept-illustration_114360-13742.jpg";
+import img1 from "../../assets/college-entrance-exam-concept-illustration_114360-13742.jpg";
 import {
   CitySelect,
   CountrySelect,
   StateSelect,
   LanguageSelect,
-} 
-from "react-country-state-city";
+} from "react-country-state-city";
 
 export default function CentreForm() {
   const [activeTab, setActiveTab] = useState("home");
   const [countryid, setCountryid] = useState(0);
   const [stateid, setstateid] = useState(0);
-  
+
   return (
     <>
       <div className=" container   d-flex" id="navtab">
@@ -110,13 +109,13 @@ export default function CentreForm() {
                       </td>
                       <td>
                         <div className="ps-5 mt-3">
-                          <CountrySelect  className="form-select mt-3"
+                          <CountrySelect
+                            className="form-select mt-3"
                             onChange={(e) => {
                               setCountryid(e.id);
                             }}
                             placeHolder="Select Country"
                           />
-                       
                         </div>
                       </td>
                     </tr>
@@ -128,7 +127,8 @@ export default function CentreForm() {
                       </td>
                       <td>
                         <div className="ps-5">
-                          <StateSelect className="form-select mt-3"
+                          <StateSelect
+                            className="form-select mt-3"
                             countryid={countryid}
                             onChange={(e) => {
                               setstateid(e.id);
@@ -146,7 +146,8 @@ export default function CentreForm() {
                       </td>
                       <td>
                         <div className="ps-5">
-                          <CitySelect className="form-select mt-3"
+                          <CitySelect
+                            className="form-select mt-3"
                             countryid={countryid}
                             stateid={stateid}
                             onChange={(e) => {
@@ -165,7 +166,8 @@ export default function CentreForm() {
                       </td>
                       <td>
                         <div className="ps-5">
-                          <LanguageSelect className="form-select mt-3"
+                          <LanguageSelect
+                            className="form-select mt-3"
                             onChange={(e) => {
                               console.log(e);
                             }}
@@ -400,13 +402,13 @@ export default function CentreForm() {
                       </td>
                       <td>
                         <div className="ps-5 mt-3">
-                          <CountrySelect  className="form-select mt-3"
+                          <CountrySelect
+                            className="form-select mt-3"
                             onChange={(e) => {
                               setCountryid(e.id);
                             }}
                             placeHolder="Select Country"
                           />
-                       
                         </div>
                       </td>
                     </tr>
@@ -418,7 +420,8 @@ export default function CentreForm() {
                       </td>
                       <td>
                         <div className="ps-5">
-                          <StateSelect className="form-select mt-3"
+                          <StateSelect
+                            className="form-select mt-3"
                             countryid={countryid}
                             onChange={(e) => {
                               setstateid(e.id);
@@ -436,7 +439,8 @@ export default function CentreForm() {
                       </td>
                       <td>
                         <div className="ps-5">
-                          <CitySelect className="form-select mt-3"
+                          <CitySelect
+                            className="form-select mt-3"
                             countryid={countryid}
                             stateid={stateid}
                             onChange={(e) => {
@@ -553,13 +557,13 @@ export default function CentreForm() {
                       </td>
                       <td>
                         <div className="ps-5 mt-3">
-                          <CountrySelect  className="form-select mt-3"
+                          <CountrySelect
+                            className="form-select mt-3"
                             onChange={(e) => {
                               setCountryid(e.id);
                             }}
                             placeHolder="Select Country"
                           />
-                       
                         </div>
                       </td>
                     </tr>
@@ -571,7 +575,8 @@ export default function CentreForm() {
                       </td>
                       <td>
                         <div className="ps-5">
-                          <StateSelect className="form-select mt-3"
+                          <StateSelect
+                            className="form-select mt-3"
                             countryid={countryid}
                             onChange={(e) => {
                               setstateid(e.id);
@@ -589,7 +594,8 @@ export default function CentreForm() {
                       </td>
                       <td>
                         <div className="ps-5">
-                          <CitySelect className="form-select mt-3"
+                          <CitySelect
+                            className="form-select mt-3"
                             countryid={countryid}
                             stateid={stateid}
                             onChange={(e) => {

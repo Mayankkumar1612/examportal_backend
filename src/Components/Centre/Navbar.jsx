@@ -1,6 +1,6 @@
 // import { useState } from "react";
-import img1 from "F:/Office work/exam portal/Exam_portal/src/assets/Screenshot 2024-09-25 155952.png";
-import img2 from "F:/Office work/exam portal/Exam_portal/src/assets/5.png";
+import img1 from "../../assets/Screenshot 2024-09-25 155952.png";
+import img2 from "../../assets/5.png";
 
 export default function Navbar() {
   // const [activeTab, setActiveTab] = useState("home");
@@ -8,7 +8,7 @@ export default function Navbar() {
   return (
     <div className="container">
       <section className="d-flex">
-        <div className="col-lg-2" >
+        <div className="col-lg-2">
           <img src={img1} className=" img-fluid pt-2 " alt="..." />
         </div>
         <div className="mt-3 ms-3 fw-bold pe-4 ">
@@ -20,9 +20,9 @@ export default function Navbar() {
         </div>
         <div className="mt-3 ms-5 fw-bold ps-5 text-end ">
           <p>
-          Ministry of Electronics & Information Technology
-            <br/>
-          Government of India
+            Ministry of Electronics & Information Technology
+            <br />
+            Government of India
           </p>
         </div>
         <div className="float-end">
@@ -34,11 +34,19 @@ export default function Navbar() {
           <a className="navbar-brand fw-bold fs-4 ms-5" href="/">
             Exam Portal
           </a>
-          <div className="offcanvas offcanvas-end text-bg-dark" id="offcanvasDarkNavbar" aria-labelledby="offcanvasDarkNavbarLabel">
+          <div
+            className="offcanvas offcanvas-end text-bg-dark"
+            id="offcanvasDarkNavbar"
+            aria-labelledby="offcanvasDarkNavbarLabel"
+          >
             <div className="offcanvas-body ">
               <ul className="navbar-nav w-75 mt-2">
                 <li className="nav-item">
-                  <a className="nav-link fw-bold fs-6" aria-current="page" href="/">
+                  <a
+                    className="nav-link fw-bold fs-6"
+                    aria-current="page"
+                    href="/"
+                  >
                     Home
                   </a>
                 </li>
@@ -120,7 +128,6 @@ export default function Navbar() {
           </div>
         </div>
       </div> */}
-      
     </div>
   );
 }
