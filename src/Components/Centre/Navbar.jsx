@@ -1,9 +1,8 @@
-// import { useState } from "react";
-import img1 from "F:/Office work/exam portal/Exam_portal/src/assets/Screenshot 2024-09-25 155952.png";
-import img2 from "F:/Office work/exam portal/Exam_portal/src/assets/5.png";
+import img1 from "../../assets/Screenshot 2024-09-25 155952.png"
+import img2 from "../../assets/5.png";
+import {Link} from 'react-router-dom'
 
 export default function Navbar() {
-  // const [activeTab, setActiveTab] = useState("home");
 
   return (
     <div className="container">
@@ -34,9 +33,9 @@ export default function Navbar() {
           <a className="navbar-brand fw-bold fs-4 ms-5" href="/">
             Exam Portal
           </a>
-          <div className="offcanvas offcanvas-end text-bg-dark" id="offcanvasDarkNavbar" aria-labelledby="offcanvasDarkNavbarLabel">
-            <div className="offcanvas-body ">
-              <ul className="navbar-nav w-75 mt-2">
+            <div className="offcanvas offcanvas-end text-bg-dark" id="offcanvasDarkNavbar" aria-labelledby="offcanvasDarkNavbarLabel">
+              <div className="offcanvas-body ">
+              <ul className="navbar-nav w-50 mt-2">
                 <li className="nav-item">
                   <a className="nav-link fw-bold fs-6" aria-current="page" href="/">
                     Home
@@ -47,80 +46,28 @@ export default function Navbar() {
                     Contact Us
                   </a>
                 </li>
+                <li className="nav-item">
+                            <button className="btn btn-success " type="submit"><span className="fw-bold fs-6">Any Query?</span></button>
+                            </li>
               </ul>
-              <form className="d-flex me-40 w-50 p-2" role="search">
-                <input
-                  className="form-control "
-                  type="search"
-                  placeholder="Search"
-                  aria-label="Search"
-                />
-                <button
-                  className="btn btn-outline-success ms-3 fw-bold fs-6"
-                  type="submit"
-                >
-                  Search
-                </button>
-              </form>
-            </div>
+                    <div className="navbarMenu ">
+                        <ul className="navbar-nav mt-2 ">
+                            <li className="nav-item">
+                            <Link className="nav-link active" aria-current="page" to="/"><span className="fw-bold fs-6">EXAM CENTRE</span></Link>
+                            </li>
+                            <l className="nav-item">
+                            <Link className="nav-link active" aria-current="page" to="/"><span className="fw-bold fs-6">EXAM SUPERINTENDENT</span></Link>
+                            </l>
+                            <li className="nav-item">
+                            <Link className="nav-link active" aria-current="page" to="/"><span className="fw-bold fs-6">ES EXAM CENTRE</span></Link>
+                            </li>
+                            
+                        </ul>
+                    </div> 
+            </div> 
           </div>
         </div>
       </nav>
-      {/* <div className="col-md-6 d-flex">
-        <ul className="nav nav-pills flex-column" id="myTab">
-          <li className="nav-item">
-            <button
-              className={`nav-link ${activeTab === "home" ? "active" : ""}`}
-              onClick={() => setActiveTab("home")}
-            >
-              Home
-            </button>
-          </li>
-          <li className="nav-item">
-            <button
-              className={`nav-link ${activeTab === "contact" ? "active" : ""}`}
-              onClick={() => setActiveTab("contact")}
-            >
-              Contact
-            </button>
-          </li>
-          <li className="nav-item">
-            <button
-              className={`nav-link ${activeTab === "link" ? "active" : ""}`}
-              onClick={() => setActiveTab("link")}
-            >
-              Link
-            </button>
-          </li>
-        </ul>
-        <div className="tab-content py-3 ">
-          <div
-            className={`tab-pane fade ${
-              activeTab === "home" ? "show active" : ""
-            }`}
-            id="home"
-          >
-            cndjcbdjcbdjbdvjdvjdncjdwnclw
-          </div>
-          <div
-            className={`tab-pane fade ${
-              activeTab === "contact" ? "show active" : ""
-            }`}
-            id="contact"
-          >
-            548945689+5628+9562
-          </div>
-          <div
-            className={`tab-pane fade ${
-              activeTab === "link" ? "show active" : ""
-            }`}
-            id="link"
-          >
-            CTFVYGBUHNIJCTFVYGBHUNJIM
-          </div>
-        </div>
-      </div> */}
-      
     </div>
   );
 }

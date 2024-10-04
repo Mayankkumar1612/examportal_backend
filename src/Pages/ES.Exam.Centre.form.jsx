@@ -1,5 +1,5 @@
 import { useState } from "react";
-import img1 from "../../assets/college-entrance-exam-concept-illustration_114360-13742.jpg";
+import img1 from "../assets/college-entrance-exam-concept-illustration_114360-13742.jpg";
 import {
   CitySelect,
   CountrySelect,
