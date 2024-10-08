@@ -14,7 +14,7 @@ export default function App() {
       <div className="container d-flex">
         <div className=" w-50">
           <Routes>
-            <Route path="/examcentre" element={<Centreform />} />
+            <Route path="/" element={<Centreform />} />
             <Route path="/examsuperintendent" element={<ESform />} />
             <Route path="/esexamcentre" element={<ESExamCentreform />} />
           </Routes>
