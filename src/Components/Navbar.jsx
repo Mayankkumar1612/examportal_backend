@@ -70,7 +70,7 @@ export default function Navbar() {
                       <span className="fw-bold fs-6">EXAM CENTRE</span>
                     </Link>
                   </li>
-                  <l className="nav-item">
+                  <li className="nav-item">
                     <Link
                       className="nav-link active"
                       aria-current="page"
@@ -78,7 +78,7 @@ export default function Navbar() {
                     >
                       <span className="fw-bold fs-6">EXAM SUPERINTENDENT</span>
                     </Link>
-                  </l>
+                  </li>
                   <li className="nav-item">
                     <Link
                       className="nav-link active"
