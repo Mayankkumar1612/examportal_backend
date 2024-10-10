@@ -25,6 +25,14 @@ export default function Centreform() {
     setCentreCity(e.target.value);
   };
 
+  const resetForm = () => {
+    setCentreCode("");
+    setCentreName("");
+    setCentreCountry("");
+    setCentreState("");
+    setCentreCity("");
+  };
+
   const submitForm = (e) => {
     e.preventDefault();
     console.log("successful pressed submit button");
@@ -47,6 +55,9 @@ export default function Centreform() {
         .post("http://127.0.0.1:3000/api/register/centre", formData)
         .then((response) => {
           console.log("Form data submitted successfully", response.data);
+
+          alert(`data saved with centre code ${centreCode}`);
+          resetForm();
         })
         .catch((error) => {
           console.error(
@@ -120,6 +131,7 @@ export default function Centreform() {
                       id=""
                       onChange={handleCountryChange}
                       value={centreCountry}
+                      required
                     >
                       <option value="">Select Country</option>
                       <option value="India">India</option>
@@ -142,6 +154,7 @@ export default function Centreform() {
                       id=""
                       onChange={handleStateChange}
                       value={centreState}
+                      required
                     >
                       <option value="">Select state</option>
                       {stateList.map((stateName, index) => (
@@ -167,6 +180,7 @@ export default function Centreform() {
                       id=""
                       onChange={handleCityChange}
                       value={centreCity}
+                      required
                     >
                       <option value="">Select city</option>
                       {cityList.map((item, index) => (
