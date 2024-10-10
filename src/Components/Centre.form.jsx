@@ -1,64 +1,69 @@
 import axios from "axios";
-import { useState, useRef } from "react";
-import {
-  CitySelect,
-  CountrySelect,
-  StateSelect,
-} from "react-country-state-city";
-import "react-country-state-city/dist/react-country-state-city.css";
+import { useState } from "react";
+import indianStateCityList from "../assets/indianStateCityList.json";
 
 export default function Centreform() {
-  const [countryid, setCountryid] = useState(0);
-  const [stateid, setStateid] = useState(0);
   const [centreCode, setCentreCode] = useState("");
   const [centreName, setCentreName] = useState("");
-  const [validated, setValidated] = useState(false);
-  const formRef = useRef(null); // Create a form ref to reset the form
+  const [centreCountry, setCentreCountry] = useState("");
+  const [centreState, setCentreState] = useState("");
+  const [centreCity, setCentreCity] = useState("");
 
-  const submitForm = async (e) => {
-    const form = e.currentTarget;
+  const stateList = Object.keys(indianStateCityList)?.sort() || [];
+  let [cityList, setCityList] = useState([]);
 
+  const handleCountryChange = (e) => {
+    setCentreCountry(e.target.value);
+    console.log(centreCountry);
+  };
+  const handleStateChange = (e) => {
+    const selectedState = e.target.value;
+    setCityList(indianStateCityList[selectedState].sort());
+    setCentreState(e.target.value);
+  };
+  const handleCityChange = (e) => {
+    setCentreCity(e.target.value);
+  };
+
+  const submitForm = (e) => {
     e.preventDefault();
-    if (form.checkValidity() === false) {
-      e.stopPropagation();
+    console.log("successful pressed submit button");
+    const formData = {
+      centreCode,
+      centreName,
+      centreCountry,
+      centreState,
+      centreCity,
+    };
+    console.log("formdata \n", formData);
+
+    const formValidations =
+      centreCode && centreName && centreCountry && centreState && centreCity
+        ? true
+        : false;
+    if (formValidations) {
+      console.log("data valid");
+      axios
+        .post("http://127.0.0.1:3000/api/register/centre", formData)
+        .then((response) => {
+          console.log("Form data submitted successfully", response.data);
+        })
+        .catch((error) => {
+          console.error(
+            "Error occurred during form submission:",
+            error.message
+          );
+        });
     } else {
-      const formData = {
-        countryid,
-        stateid,
-        centreCode,
-        centreName,
-      };
-      console.log("formdata", formData);
-
-      const { data } = await axios.post(
-        "https://127.0.0.1:3000/api/register/centre",
-        formData
-      );
-
-      console.log("form data submitted", data);
-
-      // Clear the form fields
-      setCountryid(0);
-      setStateid(0);
-      setCentreCode("");
-      setCentreName("");
-
-      formRef.current.reset(); // Reset the form fields
+      console.log("error in data");
     }
-    setValidated(true);
   };
 
   return (
     <div className="container">
       <div className="">
         <section className="text-center mt-2 fs-2 fw-bold">EXAM CENTRE</section>
-        <form
-          id="centreForm"
-          noValidate
-          ref={formRef}
-          onSubmit={submitForm}
-          className={`needs-validation ${validated ? "was-validated" : ""}`}
-        >
+        <form id="centreForm" onSubmit={submitForm}>
           <table className="table table-borderless">
             <tbody>
               <tr>
@@ -101,6 +106,7 @@ export default function Centreform() {
                   </div>
                 </td>
               </tr>
+              {/* country */}
               <tr>
                 <td>
                   <label htmlFor="inputCountry" className="form-label mt-3">
@@ -108,17 +114,20 @@ export default function Centreform() {
                   </label>
                 </td>
                 <td>
-                  <CountrySelect
-                    className="form-select mt-3"
-                    onChange={(e) => setCountryid(e.id)}
-                    placeHolder="Select Country"
-                    required
-                  />
-                  <div className="invalid-feedback">
-                    Please select a country.
+                  <div>
+                    <select
+                      name=""
+                      id=""
+                      onChange={handleCountryChange}
+                      value={centreCountry}
+                    >
+                      <option value="">Select Country</option>
+                      <option value="India">India</option>
+                    </select>
                   </div>
                 </td>
               </tr>
+              {/* state  */}
               <tr>
                 <td>
                   <label htmlFor="inputState" className="form-label mt-3">
@@ -126,16 +135,25 @@ export default function Centreform() {
                   </label>
                 </td>
                 <td>
-                  <StateSelect
-                    className="form-select mt-3"
-                    countryid={countryid}
-                    onChange={(e) => setStateid(e.id)}
-                    placeHolder="Select State"
-                    required
-                  />
                   <div className="invalid-feedback">Please select a state.</div>
+                  <div>
+                    <select
+                      name="statesList"
+                      id=""
+                      onChange={handleStateChange}
+                      value={centreState}
+                    >
+                      <option value="">Select state</option>
+                      {stateList.map((stateName, index) => (
+                        <option key={index} value={stateName}>
+                          {stateName}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
                 </td>
               </tr>
+              {/* city */}
               <tr>
                 <td>
                   <label htmlFor="inputCity" className="form-label mt-3">
@@ -143,15 +161,21 @@ export default function Centreform() {
                   </label>
                 </td>
                 <td>
-                  <CitySelect
-                    className="form-select mt-3"
-                    countryid={countryid}
-                    stateid={stateid}
-                    onChange={(e) => console.log(e)}
-                    placeHolder="Select City"
-                    required
-                  />
-                  <div className="invalid-feedback">Please select a city.</div>
+                  <div>
+                    <select
+                      name="cityList"
+                      id=""
+                      onChange={handleCityChange}
+                      value={centreCity}
+                    >
+                      <option value="">Select city</option>
+                      {cityList.map((item, index) => (
+                        <option value={item} key={index}>
+                          {item}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
                 </td>
               </tr>
               <tr>
