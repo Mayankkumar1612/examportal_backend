@@ -38,27 +38,6 @@ export default function Navbar() {
             aria-labelledby="offcanvasDarkNavbarLabel"
           >
             <div className="offcanvas-body ">
-              <ul className="navbar-nav w-50 mt-2">
-                <li className="nav-item">
-                  <a
-                    className="nav-link fw-bold fs-6"
-                    aria-current="page"
-                    href="/"
-                  >
-                    Home
-                  </a>
-                </li>
-                <li className="nav-item">
-                  <a className="nav-link fw-bold fs-6" href="/">
-                    Contact Us
-                  </a>
-                </li>
-                <li className="nav-item">
-                  <button className="btn btn-success " type="submit">
-                    <span className="fw-bold fs-6">Any Query?</span>
-                  </button>
-                </li>
-              </ul>
               <div className="">
                 <ul className="navbar-nav mt-2 ">
                   <li className="nav-item">
@@ -69,6 +48,15 @@ export default function Navbar() {
                     >
                       <span className="fw-bold fs-6">EXAM CENTRE</span>
                     </Link>
+                  </li>{" "}
+                  <li className="nav-item">
+                    <Link
+                      className="nav-link active"
+                      aria-current="page"
+                      to="/esexamcentre"
+                    >
+                      <span className="fw-bold fs-6">ES EXAM CENTRE</span>
+                    </Link>
                   </li>
                   <li className="nav-item">
                     <Link
@@ -77,15 +65,6 @@ export default function Navbar() {
                       to="/examsuperintendent"
                     >
                       <span className="fw-bold fs-6">EXAM SUPERINTENDENT</span>
-                    </Link>
-                  </li>
-                  <li className="nav-item">
-                    <Link
-                      className="nav-link active"
-                      aria-current="page"
-                      to="/esexamcentre"
-                    >
-                      <span className="fw-bold fs-6">ES EXAM CENTRE</span>
                     </Link>
                   </li>
                 </ul>

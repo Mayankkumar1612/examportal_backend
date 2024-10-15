@@ -61,7 +61,7 @@ export default function Centreform() {
           });
       }
     },
-    [formData]
+    [formData, resetForm]
   );
 
   return (
@@ -72,8 +72,8 @@ export default function Centreform() {
           <table className="table table-borderless">
             <tbody>
               {[
-                { label: "Centre Code", name: "centreCode" },
-                { label: "Centre Name", name: "centreName" },
+                { label: "Centre Code", name: "CentreCode" },
+                { label: "Centre Name", name: "CentreName" },
               ].map(({ label, name }) => (
                 <tr key={name}>
                   <td>
