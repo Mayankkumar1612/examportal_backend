@@ -1,11 +1,13 @@
 import { useState } from "react";
+import axios from "axios";
 
 export default function ESform() {
   const [examSupritendentCode, setExamSupritendentCode] = useState("");
   const [examSupritendentName, setExamSupritendentName] = useState("");
-  const [countryid, setCountryid] = useState(0);
-  const [stateid, setstateid] = useState(0);
-  const [validated, setValidated] = useState(false);
+  const [examSupritendentEmail, setExamSupritendentEmail] = useState("");
+  const [examSupritendentMobile, setExamSupritendentMobile] = useState("");
+  const [examSupritendentQualification, setExamSupritendentQualification] =
+    useState("");
 
   const submitForm = (e) => {
     e.preventDefault();
@@ -17,12 +19,7 @@ export default function ESform() {
       console.log("Form data submitted");
       // Clear fields
       form.reset(); // Resets all input fields
-      setCountryid(0); // Reset state-controlled inputs
-      setstateid(0);
-      setValidated(false); // Reset validation state
     }
-
-    setValidated(true);
   };
 
   return (
@@ -95,6 +92,7 @@ export default function ESform() {
                     type="radio"
                     name="sex"
                     id="sexMale"
+                    value="male"
                     required
                   />
                   <label className="form-check-label ms-2" htmlFor="sexMale">
@@ -105,6 +103,7 @@ export default function ESform() {
                     type="radio"
                     name="sex"
                     id="sexFemale"
+                    value="female"
                     required
                   />
                   <label className="form-check-label ms-2" htmlFor="sexFemale">
@@ -115,6 +114,7 @@ export default function ESform() {
                   </div>
                 </td>
               </tr>
+              {/* Email address */}
               <tr>
                 <td>
                   <label
@@ -129,6 +129,7 @@ export default function ESform() {
                     type="email"
                     className="form-control mt-3"
                     id="exampleInputEmail1"
+                    value={examSupritendentEmail}
                     required
                   />
                   <div className="invalid-feedback">
@@ -136,6 +137,7 @@ export default function ESform() {
                   </div>
                 </td>
               </tr>
+              {/* Mobile */}
               <tr>
                 <td>
                   <label htmlFor="inputMobile" className="form-label mt-3">
@@ -147,6 +149,7 @@ export default function ESform() {
                     type="tel"
                     className="form-control mt-3"
                     id="inputMobile"
+                    value={examSupritendentMobile}
                     required
                   />
                   <div className="invalid-feedback">
@@ -154,6 +157,7 @@ export default function ESform() {
                   </div>
                 </td>
               </tr>
+              {/* qualification */}
               <tr>
                 <td>
                   <label htmlFor="inputEducation" className="form-label mt-3">
@@ -163,6 +167,7 @@ export default function ESform() {
                 <td>
                   <input
                     type="text"
+                    value={examSupritendentQualification}
                     className="form-control mt-3"
                     id="inputEducation"
                     placeholder="Highest Qualification"
