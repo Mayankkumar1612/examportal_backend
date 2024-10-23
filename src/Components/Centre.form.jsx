@@ -43,22 +43,36 @@ export default function Centreform() {
       const completeURI = uri + "/api/register/centre";
       console.log(completeURI);
       const isFormValid = Object.values(formData).every(Boolean);
-      if (isFormValid) {
-        axios
-          .post(completeURI, formData)
-          .then((response) => {
-            console.log("response : ", response.data);
-            if (response.data.statusCode === 200) {
-              alert(`Data Saved Successfully`);
-              resetForm();
-            }
-          })
-          .catch((error) => {
-            console.error("axios error   ", error);
-            if (error.response.data.statusCode === 406) {
-              alert(`Dulplicate data centreCode already present`);
-            }
-          });
+      if (
+        [
+          formData.centreCode,
+          formData.centreName,
+          formData.centreCountry,
+          formData.centreState,
+          formData.centreCity,
+        ].some((field) => field?.trim() === "")
+      ) {
+        console.log(formData);
+
+        alert("Data is invalid");
+      } else {
+        if (isFormValid) {
+          axios
+            .post(completeURI, formData)
+            .then((response) => {
+              console.log("response : ", response.data);
+              if (response.data.statusCode === 200) {
+                alert(`Data Saved Successfully`);
+                resetForm();
+              }
+            })
+            .catch((error) => {
+              console.error("axios error   ", error);
+              if (error.response.data.statusCode === 406) {
+                alert(`Dulplicate data centreCode already present`);
+              }
+            });
+        }
       }
     },
     [formData, resetForm]
@@ -72,8 +86,8 @@ export default function Centreform() {
           <table className="table table-borderless">
             <tbody>
               {[
-                { label: "Centre Code", name: "CentreCode" },
-                { label: "Centre Name", name: "CentreName" },
+                { label: "Centre Code", name: "centreCode" },
+                { label: "Centre Name", name: "centreName" },
               ].map(({ label, name }) => (
                 <tr key={name}>
                   <td>
@@ -87,7 +101,7 @@ export default function Centreform() {
                       className="form-control mt-3"
                       id={`input${name}`}
                       name={name}
-                      value={formData[name]}
+                      value={formData[name] || ""}
                       onChange={handleInputChange}
                       required
                     />

@@ -5,10 +5,19 @@ export default function ESExamCentreform() {
   const [formData, setFormData] = useState({
     centreCode: "",
     examSuperintendentCode: "",
-    startDate: "",
-    endDates: "",
+    examStartDate: "",
+    examEndDate: "",
     examCycle: "",
   });
+  const resetForm = () => {
+    setFormData({
+      centreCode: "",
+      examSuperintendentCode: "",
+      examStartDate: "",
+      examEndDate: "",
+      examCycle: "",
+    });
+  };
   const [centreCodes, setCentreCodes] = useState([]);
   const [examSuperintendentCodes, setExamSuperintendentCodes] = useState([]);
   const currentYear = new Date().getFullYear();
@@ -67,7 +76,7 @@ export default function ESExamCentreform() {
     },
     {
       label: "Centre Code",
-      name: "CentreCode",
+      name: "centreCode",
       placeholder: "Select Code",
       options: [...centreCodes],
     },
@@ -78,7 +87,7 @@ export default function ESExamCentreform() {
       options: [...examCycle],
     },
   ];
-  const inputFields = [
+  const dateFields = [
     {
       label: "Exam Start Date",
       name: "examStartDate",
@@ -92,25 +101,46 @@ export default function ESExamCentreform() {
   ];
   const handleInputChange = useCallback((e) => {
     const { name, value } = e.target;
+    console.log(value);
+
     setFormData((prevData) => ({
       ...prevData,
       [name]: value,
     }));
   }, []);
 
-  const submitForm = (e) => {
-    const form = e.currentTarget;
-    if (form.checkValidity() === false) {
+  const submitForm = useCallback(
+    async (e) => {
       e.preventDefault();
-      e.stopPropagation();
-    } else {
-      e.preventDefault();
-      console.log("form data submitted");
+      const completeURI =
+        import.meta.env.VITE_BACKEND_URI +
+        ":" +
+        import.meta.env.VITE_BACKEND_PORT +
+        "/api/register/examSuperintendent";
+      console.log(formData);
+      const isFormValid = Object.values(formData).every(Boolean);
+      if (isFormValid) {
+        axios
+          .post(completeURI, formData)
+          .then((response) => {
+            console.log("response : ", response.data);
+            if (response.data.statusCode === 200) {
+              alert(`Data Saved Successfully`);
+              resetForm();
+            }
+          })
+          .catch((error) => {
+            console.error("axios error   ", error);
+            console.log(error.response.data.statusCode);
 
-      // Reset form and states after submission
-      form.reset();
-    }
-  };
+            if (error.response.data.statusCode === 406) {
+              alert(`Dulplicate data centreCode already present`);
+            }
+          });
+      }
+    },
+    [formData]
+  );
 
   return (
     <div className="container">
@@ -118,7 +148,7 @@ export default function ESExamCentreform() {
         <section className="text-center mt-2 fs-2 fw-bold">
           EXAM SUPERINTENDENT CENTRE
         </section>
-        <form id="examSuprintendentCentreForm">
+        <form id="examSuprintendentCentreForm" onSubmit={submitForm}>
           <table className="table table-borderless">
             <tbody>
               {selecFields.map(({ label, name, placeholder, options }) => (
@@ -136,6 +166,7 @@ export default function ESExamCentreform() {
                       onChange={handleInputChange}
                       className="form-control mt-3"
                       placeholder={placeholder}
+                      required
                     >
                       <option value="">Select {label}</option>
                       {options.map((option) => (
@@ -147,7 +178,7 @@ export default function ESExamCentreform() {
                   </td>
                 </tr>
               ))}
-              {inputFields.map(({ label, name, type, placeholder }) => (
+              {dateFields.map(({ label, name, type }) => (
                 <tr key={name}>
                   <td>
                     <label htmlFor={`input${name}`} className="form-label mt-3">
@@ -163,11 +194,10 @@ export default function ESExamCentreform() {
                       value={formData[name]}
                       onChange={handleInputChange}
                       required
-                      placeholder={placeholder}
                     />
                   </td>
                 </tr>
-              ))}{" "}
+              ))}
               <tr>
                 <td colSpan={2} className="text-center">
                   <button type="submit" className="btn btn-primary mt-3">
